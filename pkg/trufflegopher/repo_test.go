@@ -8,11 +8,11 @@ import (
 )
 
 func TestRepoScan(t *testing.T) {
-	tempDir := "../test_resources/tmp"
+	tempDir := "../../test/tmp"
 
 	os.RemoveAll(tempDir)
 	os.Mkdir(tempDir, os.ModePerm)
-	_, err := unzip("../test_resources/dummy-repo.zip", tempDir)
+	_, err := unzip("../../test/dummy-repo.zip", tempDir)
 	if err != nil {
 		t.Fatal("Failed to unzip file")
 	}

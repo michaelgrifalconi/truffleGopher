@@ -23,18 +23,17 @@ func TestDiskOperationLoad(t *testing.T) {
 		t.Fatal("Failed to initialize trufflegopher")
 	}
 
-	err = th.LoadState("../test_resources/dummy-repoDB.bin")
+	err = th.LoadState("../../test/dummy-repoDB.bin")
 	if err != nil {
 		t.Fatal("Failed to load state from file")
 	}
-	fmt.Println(th.SearchedDiffs.Keys())
 	_, ok := th.SearchedDiffs.Get("5c611b9765a9be73c9ff502aec0221d3f990571044cf358fc4d5653d7c885fb8af2bea0437f9ab21")
 	if !ok {
 		t.Fatal("Failed to retrieve expected key from loaded map")
 	}
 }
 func TestDiskOperationSave(t *testing.T) {
-	tempDir := "../test_resources/tmp"
+	tempDir := "../../test/tmp"
 
 	os.RemoveAll(tempDir)
 	os.Mkdir(tempDir, os.ModePerm)

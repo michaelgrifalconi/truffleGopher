@@ -8,6 +8,8 @@ import (
 	git "gopkg.in/libgit2/git2go.v27"
 )
 
+//TODO: review Cgo usage and check if we have to free some memory manually?
+
 //More info at https://gobyexample.com/closures
 func getOdbForEachCallback(r *git.Repository, t *Trufflegopher) git.OdbForEachCallback {
 	return func(id *git.Oid) error {
@@ -104,8 +106,8 @@ func repoScan(repoPath string, t *Trufflegopher) error {
 		time.Sleep(time.Second)
 	}
 
-	fmt.Println("DIFF: ", diffCounter)
-	fmt.Println("COMMIT: ", commitCounter)
-	fmt.Println("SKIP: ", skippedCounter)
+	// fmt.Println("DIFF: ", diffCounter)
+	// fmt.Println("COMMIT: ", commitCounter)
+	// fmt.Println("SKIP: ", skippedCounter)
 	return nil
 }

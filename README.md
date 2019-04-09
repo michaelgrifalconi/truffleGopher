@@ -15,10 +15,13 @@ Due to design differences, do not expect any compatibility with the original Tru
    - [x] scans only additions and not whole diff
    - [x] implement parallel scan of multiple diffs to reduce chance to get stuck on single huge diff
    - [ ] provide easy way to benchmark performances between TruffleGopher and TruffleHog
+ - [ ] send findings to given SQL database instead of sending through channel
  - [ ] provides metrics on how many commits/diff were scanned/skipped, number of findings, more?
  - [ ] able to skip blacklisted paths in diffs (e.g. vendor dir)
-
- Other ongoing work:
+ - [ ] follow [go project layout](https://github.com/golang-standards/project-layout)
+   - [ ] trufflegopher pkg in pkg dir
+   - [ ] cmd/app/main.go and internal/app/app.go for current main.go file
+ - [ ] https://godoc.org/-/about
  - [ ] better error handling
  - [ ] better logging
  - [ ] better testing

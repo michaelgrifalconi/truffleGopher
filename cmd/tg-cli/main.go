@@ -7,7 +7,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/michaelgrifalconi/trufflegopher/trufflegopher"
+	"github.com/michaelgrifalconi/trufflegopher/pkg/trufflegopher"
 	"gopkg.in/yaml.v2"
 )
 
@@ -16,6 +16,7 @@ type SignatureFileStruct struct {
 	Signatures []trufflegopher.Signature `yaml:"signatures"`
 }
 
+//TODO: Consider moving most of this code to /internal dir according to https://github.com/golang-standards/project-layout
 func main() {
 
 	signaturesFile := flag.String("signatures", "", "regex signatures yaml file")

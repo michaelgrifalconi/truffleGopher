@@ -1,9 +1,9 @@
 #!/bin/bash -e
 
-TMP_DIR="./tmp"
+TMP_DIR="../tmp"
 TARGET_REPO="https://github.com/golang/tools.git"
 
-if [ -z "$1" ] then
+if [ -z "$1" ] ;then
     echo "Target repo supplied: will use $1"
     TARGET_REPO=$1
 else
@@ -14,7 +14,7 @@ mkdir -p "$TMP_DIR"
 pushd "$TMP_DIR"
 
 echo "Getting latest TruffleGopher.."
-go get "github.com/michaelgrifalconi/trufflegopher" &> /dev/null
+go get "github.com/michaelgrifalconi/trufflegopher/cmd/cli" &> /dev/null
 
 echo "Getting latest TruffleHog.."
 pip install truffleHog &> /dev/null
@@ -42,7 +42,7 @@ echo "STARTING Trufflehog scan.."
 (time truffleHog --rules trufflehog-rules.json file://"$TARGET" ) > /dev/null
 
 echo "STARTING Trufflegopher scan.."
-(time ./tg -signatures="trufflegopher-rules.json" -repo="$TARGET")
+(time ./tg-cli -signatures="trufflegopher-rules.json" -repo="$TARGET")
 
 popd
 

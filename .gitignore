@@ -2,3 +2,4 @@ tg
 .vscode
 vendor
 test_resources/tmp
+tmp

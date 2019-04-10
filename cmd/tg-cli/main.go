@@ -57,6 +57,7 @@ func main() {
 
 	go func() {
 		for f := range t.FindingsChan {
+			fmt.Println("==============================================")
 			fmt.Println(f.Reason)
 			fmt.Println(f.CommitDate)
 			fmt.Println(f.CommitHash)

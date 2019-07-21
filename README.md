@@ -3,7 +3,7 @@
 # truffleGopher
 Searches through a given git repository for secrets, digging deep into each commit ever pushed on its target. It is meant to find accidentaly committed secrets, but you can use it with any given regular expression you like.
 
-Credits goes to the original project: [truffleHog](https://github.com/dxa4481/truffleHog) which I used as baseline to design this Go implmentation.
+Credits goes to the original project: [truffleHog](https://github.com/dxa4481/truffleHog) which I used as baseline to design this Go implementation.
 
 Due to design differences, do not expect any compatibility with the original TruffleHog even though the main goal is the same.
 

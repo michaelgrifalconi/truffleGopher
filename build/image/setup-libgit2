@@ -1,0 +1,14 @@
+#!/bin/bash -e
+
+TMP_DIR="/tmp/libgit2"
+mkdir -p "$TMP_DIR" && cd  "$TMP_DIR"
+
+git clone --recursive https://github.com/libgit2/libgit2.git && cd libgit2 && git checkout v0.27.8
+
+mkdir build && cd build
+cmake ..
+cmake --build .
+cmake --build . --target install
+
+cd /
+rm -rf "$TMP_DIR"

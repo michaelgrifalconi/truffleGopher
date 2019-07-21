@@ -1,0 +1,14 @@
+#!/bin/bash -e
+
+
+cloneRepo() {
+  #Cloning target repository in "target-repo" subdir
+  LOCATION=$1
+  REPO=$2
+  pushd "$LOCATION" > /dev/null
+  if [ -d target-repo ] ; then
+    rm -rf target-repo
+  fi
+  git clone --quiet "$REPO" target-repo
+  popd
+}

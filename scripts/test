@@ -1,0 +1,46 @@
+#!/bin/bash -e
+
+#TODO: 
+# Model:
+#
+# TBD:Run all go tests AND build
+#    Or simply test last built image?
+#
+# Run e2e test:
+#  Clone target repo (given or default)
+#  Run built image on target
+#TODO: add more repos / expected results
+
+
+SCRIPT_DIR=$(dirname "$0")
+source "$SCRIPT_DIR/helpers"
+
+# Scope: test current source code on docker container
+# Expecting to find source code already compiled in tmp/bin
+
+
+TARGET_REPO="https://github.com/golang/tools.git"
+TMP_DIR="$SCRIPT_DIR/../tmp"
+
+if [ $# -eq 0 ] ;then
+    echo "Target repo was not supplied: will use default $TARGET_REPO"
+else
+    echo "Target repo supplied: will use $1"
+    TARGET_REPO=$1
+fi
+
+cloneRepo "$TMP_DIR" "$TARGET_REPO"
+TARGET=$(pwd)/target-repo
+
+pushd "$TMP_DIR" > /dev/null
+
+echo "Writing sample TruffleGopher Rule.."
+cat << EOF > trufflegopher-rules.yml
+signatures:
+- exp:  "AKIA[0-9A-Z]{16}"
+description:  "AWS KEY"
+EOF
+
+tg -signatures="trufflegopher-rules.yml" -repo="$TARGET"
+
+popd

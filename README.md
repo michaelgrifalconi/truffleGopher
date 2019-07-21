@@ -5,7 +5,7 @@ Searches through a given git repository for secrets, digging deep into each comm
 
 Credits goes to the original project: [truffleHog](https://github.com/dxa4481/truffleHog) which I used as baseline to design this Go implmentation.
 
-Due to design differences, do not expect any compatibility with the original TruffleHog even though the end result is expected to be the same.
+Due to design differences, do not expect any compatibility with the original TruffleHog even though the main goal is the same.
 
  - written golang
  - designed to be integrated as package, CLI is only a convenience tool (See GitPD project)

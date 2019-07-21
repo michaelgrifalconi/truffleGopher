@@ -1,0 +1,15 @@
+#!/bin/bash -e
+
+SCRIPT_DIR=$(dirname "$0")
+
+TARGET_REPO="https://github.com/golang/tools.git"
+
+if [ $# -eq 0 ] ;then
+    echo "Target repo was not supplied: will use default $TARGET_REPO"
+else
+    echo "Target repo supplied: will use $1"
+    TARGET_REPO=$1
+fi
+
+
+TARGET=$(pwd)/target-repo

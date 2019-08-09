@@ -4,3 +4,4 @@ services:
 
 script:
 - scripts/build-image
+- scripts/test

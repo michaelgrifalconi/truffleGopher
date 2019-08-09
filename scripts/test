@@ -38,9 +38,11 @@ echo "Writing sample TruffleGopher Rule.."
 cat << EOF > trufflegopher-rules.yml
 signatures:
 - exp:  "AKIA[0-9A-Z]{16}"
-description:  "AWS KEY"
+  description:  "AWS KEY"
+- exp:  "MERCHANTABILITY"
+  description:  "Merchantability"
 EOF
 
-tg -signatures="trufflegopher-rules.yml" -repo="$TARGET"
+docker run -v "$(pwd)":/tmp michaelgrifalconi/tg:0 -signatures="/tmp/trufflegopher-rules.yml" -repo="/tmp/target-repo"
 
 popd

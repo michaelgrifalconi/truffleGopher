@@ -13,4 +13,4 @@ ENV GOBIN $GOPATH/bin
 RUN go build -o tg ./cmd/tg/main.go
 RUN mv tg /go/bin/tg
 
-ENTRYPOINT tg
+ENTRYPOINT ["tg"]

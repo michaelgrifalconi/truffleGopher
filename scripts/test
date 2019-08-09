@@ -32,6 +32,7 @@ fi
 cloneRepo "$TMP_DIR" "$TARGET_REPO"
 TARGET=$(pwd)/target-repo
 
+mkdir -p "$TMP_DIR"
 pushd "$TMP_DIR" > /dev/null
 
 echo "Writing sample TruffleGopher Rule.."

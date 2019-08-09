@@ -5,7 +5,7 @@ PROJECT_DIR="$(dirname "$0")/.."
 # TODO: need to handle tag versions
 
 pushd "$PROJECT_DIR"
-  docker build -t michaelgrifalconi/tg:0 -f ./build/image/Dockerfile .
+  docker build --no-cache -t michaelgrifalconi/tg:0 -f ./build/image/Dockerfile .
 popd
 
 #TODO: test install with go get on image without libgit2 if works or still need dependencies

@@ -2,3 +2,4 @@ tg-cli
 .vscode
 test_resources/tmp
 tmp
+.DS_Store

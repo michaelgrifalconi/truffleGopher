@@ -7,11 +7,11 @@ TMP_DIR="$SCRIPT_DIR/../tmp"
 source "$SCRIPT_DIR/helpers"
 
 TARGET_REPO="https://github.com/golang/tools.git"
-VERSION="$(cat "$SCRIPT_DIR"/../version)"
+VERSION="v$(cat "$SCRIPT_DIR"/../version)"
 
 
 print_usage(){
-    echo "Usage: scripts/test --version=XX --target=XXXXX"
+    echo "Usage: scripts/test --version=vXX --target=XXXXX"
     echo "--version   : docker image version to test - Default: latest"
     echo "--target    : git repository to target     - Default: https://github.com/golang/tools.git"
     echo "--signature : signature file to use         - Default: test/sample_rules.yml"

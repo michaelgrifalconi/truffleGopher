@@ -5,3 +5,11 @@ services:
 script:
 - scripts/build-image
 - scripts/test
+
+jobs:
+  include:
+  - stage: build and test
+    if: type = pull_request
+    script:
+    - bash scripts/build-image
+    - bash scripts/test

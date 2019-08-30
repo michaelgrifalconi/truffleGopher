@@ -1,50 +1,59 @@
 #!/bin/bash -e
 
-#TODO: 
-# Model:
-#
-# TBD:Run all go tests AND build
-#    Or simply test last built image?
-#
-# Run e2e test:
-#  Clone target repo (given or default)
-#  Run built image on target
-#TODO: add more repos / expected results
-
 
 SCRIPT_DIR=$(dirname "$0")
+TMP_DIR="$SCRIPT_DIR/../tmp"
+
 source "$SCRIPT_DIR/helpers"
 
-# Scope: test current source code on docker container
-# Expecting to find source code already compiled in tmp/bin
-
-
 TARGET_REPO="https://github.com/golang/tools.git"
-TMP_DIR="$SCRIPT_DIR/../tmp"
+VERSION="$(cat "$SCRIPT_DIR"/../version)"
+
+
+print_usage(){
+    echo "Usage: scripts/test --version=XX --target=XXXXX"
+    echo "--version   : docker image version to test - Default: latest"
+    echo "--target    : git repository to target     - Default: https://github.com/golang/tools.git"
+    echo "--signature : signature file to use         - Default: test/sample_rules.yml"
+    echo "--help      : show help"
+}
+
+while [ $# -gt 0 ]; do
+
+  case "$1" in
+  --help)
+      print_usage
+      exit 0
+      ;;
+
+      --version=*)
+      VERSION="${1#*=}"
+      ;;
+
+      --target=*)
+      TARGET_REPO="${1#*=}"
+      ;;
+
+      *)
+      echo "***************************"
+      echo "* Error: Invalid argument.*"
+      echo "***************************"
+      print_usage
+      exit 1
+  esac
+  shift
+
+done
+
+echo "Using version $VERSION"
+echo "Using target  $TARGET_REPO"
+
+
 mkdir -p "$TMP_DIR"
 
-if [ $# -eq 0 ] ;then
-    echo "Target repo was not supplied: will use default $TARGET_REPO"
-else
-    echo "Target repo supplied: will use $1"
-    TARGET_REPO=$1
-fi
-
+echo "Cloning target in $TMP_DIR"
 cloneRepo "$TMP_DIR" "$TARGET_REPO"
-TARGET=$(pwd)/target-repo
+TARGET_REPO=$(pwd)/target-repo
 
-
-pushd "$TMP_DIR" > /dev/null
-
-echo "Writing sample TruffleGopher Rule.."
-cat << EOF > trufflegopher-rules.yml
-signatures:
-- exp:  "AKIA[0-9A-Z]{16}"
-  description:  "AWS KEY"
-- exp:  "MERCHANTABILITY"
-  description:  "Merchantability"
-EOF
-
-docker run -v "$(pwd)":/tmp michaelgrifalconi/tg:0 -signatures="/tmp/trufflegopher-rules.yml" -repo="/tmp/target-repo"
-
-popd
+echo "Running scan.."
+docker run -v "$(pwd)":/tmp michaelgrifalconi/tg:"$VERSION" -signatures="/tmp/test/sample_rules.yml" -repo="/tmp/tmp/target-repo"

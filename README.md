@@ -1,4 +1,4 @@
-
+lol
 
 # truffleGopher
 Searches through a given git repository for secrets, digging deep into each commit ever pushed on its target. It is meant to find accidentaly committed secrets, but you can use it with any given regular expression you like.

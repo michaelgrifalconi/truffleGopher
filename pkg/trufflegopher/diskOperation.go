@@ -56,7 +56,7 @@ func diskOperationLoad(path string, t *Trufflegopher) error {
 		t.SearchedDiffs.MSet(m)
 
 	} else if os.IsNotExist(err) {
-		log.Println("File not found, skipping load..")
+		log.Println("Scan Database file not found, skipping load..")
 		return nil
 	} else {
 		// Schrodinger: file may or may not exist. See err for details.

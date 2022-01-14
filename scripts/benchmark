@@ -17,9 +17,12 @@ fi
 mkdir -p "$TMP_DIR"
 pushd "$TMP_DIR" > /dev/null
 
+#TMP_DIR="$(pwd)"
+
 #TODO: consider to handle both latest committed version and local source
-echo "Getting latest TruffleGopher.."
-go get "github.com/michaelgrifalconi/trufflegopher/cmd/tg-cli"
+#echo "Getting latest TruffleGopher.."
+#go get "github.com/michaelgrifalconi/trufflegopher/cmd/tg-cli"
+# Using locally built image for now
 
 echo "Getting latest TruffleHog.."
 pip install truffleHog &> /dev/null
@@ -39,6 +42,8 @@ signatures:
 description:  "AWS KEY"
 EOF
 
+popd
+
 echo "Cloning benchmark target repository.."
 cloneRepo "$TMP_DIR" "$TARGET_REPO"
 
@@ -48,7 +53,7 @@ echo "============================="
 echo "STARTING truffleHog scan.."
 START=$(date +%s)
 set +e
-truffleHog --entropy=False --rules trufflehog-rules.json file://"$TARGET" > /dev/null
+trufflehog --entropy=False --rules "$(pwd)/tmp/trufflehog-rules.json" file:///"$(pwd)/tmp/target-repo" > /dev/null
 set -e
 END=$(date +%s)
 TH_TIME=$((END - START))
@@ -57,11 +62,10 @@ TH_TIME=$((END - START))
 echo "============================="
 echo "STARTING truffleGopher scan.."
 START=$(date +%s)
-tg -signatures="trufflegopher-rules.yml" -repo="$TARGET"
-END=$(date +%s)
+docker run --rm -v "$(pwd)":/tmp michaelgrifalconi/tg:v0 -signatures="/tmp/tmp/trufflegopher-rules.yml" -repo="/tmp/tmp/target-repo" -dbfile="/tmp/tmp/scanDB"
+
 END=$(date +%s)
 TG_TIME=$((END - START))
-popd
 
 echo "truffleHog:    ${TH_TIME}s"
 echo "truffleGopher: ${TG_TIME}s"

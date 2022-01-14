@@ -42,7 +42,8 @@ Not yet ready
 #### Benchmark
 
 ```
-Not yet ready
+./scripts/build-image
+./scripts/benchmark
 ```
 
 ## Contributing

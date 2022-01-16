@@ -20,7 +20,7 @@ jobs:
         with:
           images: michaelgrifalconi/tg
           tags: |
-            type=semver,pattern=alpine-base-v{{major}}
+            type=semver,pattern=v{{major}}
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1

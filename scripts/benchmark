@@ -62,7 +62,7 @@ TH_TIME=$((END - START))
 echo "============================="
 echo "STARTING truffleGopher scan.."
 START=$(date +%s)
-docker run --rm -v "$(pwd)":/tmp michaelgrifalconi/tg:v0 -signatures="/tmp/tmp/trufflegopher-rules.yml" -repo="/tmp/tmp/target-repo" -dbfile="/tmp/tmp/scanDB"
+docker run --rm -v "$(pwd)":/tmp michaelgrifalconi/tg:v1 -signatures="/tmp/tmp/trufflegopher-rules.yml" -repo="/tmp/tmp/target-repo" -dbfile="/tmp/tmp/scanDB"
 
 END=$(date +%s)
 TG_TIME=$((END - START))

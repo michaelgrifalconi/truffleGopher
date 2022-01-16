@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	git "gopkg.in/libgit2/git2go.v27"
+	git "github.com/libgit2/git2go/v33"
 )
 
 //TODO: review Cgo usage and check if we have to free some memory manually?

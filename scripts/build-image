@@ -5,5 +5,5 @@ PROJECT_DIR="$(dirname "$0")/.."
 rm -rf "$PROJECT_DIR"/tmp/
 
 pushd "$PROJECT_DIR"
-  docker build --no-cache -t michaelgrifalconi/tg:v0 -f ./build/image/Dockerfile .
+  docker build --no-cache -t michaelgrifalconi/tg:v1 -f ./build/image/Dockerfile .
 popd
